@@ -269,7 +269,7 @@ app.post("/users", controllerCreateUser)
 app.get("/users", ensureAuthMiddleware, ensureIsAdm, controllerListUsers)
 app.get("/users/profile", ensureAuthMiddleware, retrieveUserController)
 app.post("/login", createSessionController)
-app.patch("/users/:uuid", ensureAuthMiddlewareEdit, ensureAdmToken, controllerEditUser)
+app.patch("/users/:id", ensureAuthMiddlewareEdit, ensureAdmToken, controllerEditUser)
 app.delete("/users/:id", ensureAuthMiddleware, ensureIsAdm, controllerDeleteUser)
 app.listen(port, () => console.log(`App rodando na porta ${port}`))
 

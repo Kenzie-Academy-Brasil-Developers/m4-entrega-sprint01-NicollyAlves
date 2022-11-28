@@ -73,22 +73,6 @@ const ensureAuthMiddlewareEdit = (req, res, next) => {
     
 }
 
-
-const ensureUserExistsMiddleware = (req, res, next) => {
-
-    if(userIndex === -1) {
-        return res.status(400).json({
-            message: "User not found!"
-        })
-    }
-
-    req.user = {
-        userIndex: userIndex
-    }
-
-    return next()
-}
-
 const ensureIsAdm = (req, res, next) => {
 
     const {isAdm} = req.user
@@ -269,8 +253,8 @@ app.post("/users", controllerCreateUser)
 app.get("/users", ensureAuthMiddleware, ensureIsAdm, controllerListUsers)
 app.get("/users/profile", ensureAuthMiddleware, retrieveUserController)
 app.post("/login", createSessionController)
-app.patch("/users/:id", ensureAuthMiddlewareEdit, ensureAdmToken, controllerEditUser)
-app.delete("/users/:id", ensureAuthMiddleware, ensureIsAdm, controllerDeleteUser)
+app.patch("/users/:uuid", ensureAuthMiddlewareEdit, ensureAdmToken, controllerEditUser)
+app.delete("/users/:uuid", ensureAuthMiddleware, ensureIsAdm, controllerDeleteUser)
 app.listen(port, () => console.log(`App rodando na porta ${port}`))
 
 export default app
